@@ -34,7 +34,7 @@ export const FilmList: React.FC = () => {
         }
     }); 
 
-    const classNameItem = !affichageListe ? "grid lg:grid-cols-7 sm:grid-cols-2 gap-4 mt-3" : "";
+    const classNameItem = !affichageListe ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mt-3" : "";
 
     return (
         <>
