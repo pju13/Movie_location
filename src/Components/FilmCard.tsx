@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { ThemeContext } from "./context/FilmProvider";
 import { Link } from "react-router-dom";
 
-import './FilmItemNew.css';
+import '../styles/FilmCard.css'
 
 function formaterDate(dateStr: string) {
     // Diviser la chaîne de date en composants
@@ -22,7 +22,7 @@ function calculerPourcentage(voteAverage: number) {
     return parseFloat(pourcentage) * 10;
 }
 
-export const FilmItemNew: React.FC<MovieCardProps> = ({ film }) => {
+export const FilmCard: React.FC<MovieCardProps> = ({ film }) => {
     const context = useContext(ThemeContext);
     if (!context) {
         throw new Error("useContext must be used within a ThemeContext.Provider");

@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from "react";
-import { FilmItemNew } from "./FilmItemNew";
+import { FilmCard } from "./FilmCard";
 import { ThemeContext } from "./context/FilmProvider";
-import { FetchFilms } from "./api/FetchFilms";
+import { useFetchFilms } from "./hooks/useFetchFilms";
 import { Film } from "../types/types";
 import { FilmRow } from "./FilmRow";
 
 export const FilmList: React.FC = () => {
-    const { films, isError, isLoading } = FetchFilms();
+    const { films, isError, isLoading } = useFetchFilms();
 
     const context = useContext(ThemeContext);
     if (!context) {
@@ -25,11 +25,11 @@ export const FilmList: React.FC = () => {
         if (!isLocate(film.id)) {
             if (search !== '' && film.original_title.toLowerCase().indexOf(search.toLowerCase()) !== -1) {
                 return affichageListe ? <FilmRow key={film.id} film={film} />
-                : <FilmItemNew key={film.id} film={film} />
+                : <FilmCard key={film.id} film={film} />
             } 
             if (search === '') {
                 return affichageListe ? <FilmRow key={film.id} film={film} />
-                : <FilmItemNew key={film.id} film={film} />
+                : <FilmCard key={film.id} film={film} />
             }
         }
     }); 

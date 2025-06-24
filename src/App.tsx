@@ -2,9 +2,9 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { FilmProvider } from './Components/context/FilmProvider'
-import { Accueil } from './Pages/Accueil'
-import { Profile } from './Pages/Profile';
-import { DetailsFilm } from './Pages/DetailsFilm';
+import { Accueil } from './pages/Accueil';
+import { Profile } from './pages/Profile';
+import { DetailsFilm } from './pages/DetailsFilm';
 
 export default function App() {
   return (

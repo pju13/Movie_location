@@ -21,7 +21,7 @@ export const DetailsFilm: React.FC = () => {
         }        
         if (id && rentFilms) {
             setDisplayBtnLouer(!(rentFilms?.find((film: Film) => film.id == parseInt(id))));
-            console.log(rentFilms);
+            //console.log(rentFilms);
         }
     }, [id, films, rentFilms, setterRent]);
 

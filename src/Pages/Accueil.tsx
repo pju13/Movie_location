@@ -13,5 +13,4 @@ export const Accueil: React.FC = () => {
             <Footer />
         </Body>
     );
-
 }

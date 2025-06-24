@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { ThemeContext } from "./context/FilmProvider";
 import { Search } from "./Search";
-import { useUser } from "./api/useUser";
+import { useUser } from "./hooks/useUser";
 import { Film } from "../types/types";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";

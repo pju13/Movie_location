@@ -12,6 +12,8 @@ export const Panier: React.FC = () => {
     const nbFilmsLoue = rentFilms?.length;
     const TotalAPayer = nbFilmsLoue * 2;
 
+    document.title = TotalAPayer > 0 ? `Mon panier: ${TotalAPayer}€ d'achats` : 'Vidéothèque : Les films à louer';
+
     const filmsLouer = Array.isArray(rentFilms) ? rentFilms?.map((film: Film) => {
         const url = `https://image.tmdb.org/t/p/w200/${film.poster_path}`;
         return (
