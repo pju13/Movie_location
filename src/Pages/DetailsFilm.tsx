@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useContext } from "react";
 import { Navbar } from "../Components/Navbar";
 import { Footer } from "../Components/Footer";
 import { Body } from "../Components/Body";
-import { ThemeContext } from "../Components/context/FilmProvider";
 import { Film } from "../types/types";
+import { useStore } from "../Components/context/FilmProvider";
 
 export const DetailsFilm: React.FC = () => {
     const { id } = useParams();
     const [filmDetails, setFilmDetails] = useState<Film>();
     const [displayBtnLouer, setDisplayBtnLouer] = useState(true);
-    const { user, films, setterRent, rentFilms } = useContext(ThemeContext);
+
+    const films = useStore((state) => state.films);
+    const user = useStore((state) => state.user);
+    const rentFilms = useStore((state) => state.rentFilms);
+    const updateFilmsRent = useStore((state) => state.updateFilmsRent);
 
     const url = `https://image.tmdb.org/t/p/w200/${filmDetails?.poster_path}`;
 
@@ -21,9 +24,8 @@ export const DetailsFilm: React.FC = () => {
         }        
         if (id && rentFilms) {
             setDisplayBtnLouer(!(rentFilms?.find((film: Film) => film.id == parseInt(id))));
-            //console.log(rentFilms);
         }
-    }, [id, films, rentFilms, setterRent]);
+    }, [id, films, rentFilms, updateFilmsRent]);
 
     return (
         <Body>
@@ -61,7 +63,7 @@ export const DetailsFilm: React.FC = () => {
                                 </div>
                                 {user && displayBtnLouer === true ?
                                 <button className="btn btn-warning cursor-pointer mt-2"
-                                    onClick={() => setterRent(filmDetails)}>
+                                    onClick={() => updateFilmsRent(filmDetails)}>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="size-[1.2em]"><path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>
                                     Louer
                                 </button> : null}

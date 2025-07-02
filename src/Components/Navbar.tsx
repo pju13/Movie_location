@@ -1,18 +1,16 @@
-import React, { useContext } from "react";
-import { ThemeContext } from "./context/FilmProvider";
+import React from "react";
 import { Search } from "./Search";
 import { useUser } from "./hooks/useUser";
 import { Film } from "../types/types";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useStore } from "./context/FilmProvider";
 
 export const Navbar: React.FC = () => {
-    const context = useContext(ThemeContext);
-    if (!context) {
-        throw new Error("useContext doit être utilisé avec ThemeContext.Provider");
-    }
-    
-    const { rentFilms, user, setUser, setRentFilms } = context;
+    const setUser = useStore((state) => state.setUser);
+    const deleteAllFilmsToRent = useStore((state) => state.deleteAllFilmsToRent);
+    const rentFilms = useStore((state) => state.rentFilms);
+    const user = useStore((state) => state.user);
 
     const { data, isLoading, isError } = useUser();
     const navigate = useNavigate();
@@ -26,7 +24,7 @@ export const Navbar: React.FC = () => {
 
     const handleClickLogout = () => {
         setUser(undefined);
-        setRentFilms([]);
+        deleteAllFilmsToRent();
         navigate('/');
     };
 
@@ -80,7 +78,7 @@ export const Navbar: React.FC = () => {
 
                             <span className="text-gray-50 text-lg font-bold">Total à payer: {TotalAPayer}€</span>
                             <div className="card-actions">
-                                <label htmlFor="my-drawer" className="btn btn-warning btn-block">🎥 Mon panier</label>
+                                <Link to="/cart" className="btn btn-warning btn-block">🎥 Mon panier</Link>
                             </div>
                         </div>
                     </div>

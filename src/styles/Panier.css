@@ -1,0 +1,102 @@
+/* --- Conteneur principal du panier --- */
+.panier-container {
+    max-width: 900px;
+    margin: 20px auto; /* Centre le tableau sur la page */
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 2rem;
+}
+
+/* --- Style du tableau --- */
+.panier-table {
+    width: 100%;
+    border-collapse: collapse; /* Essentiel pour que les bordures fonctionnent bien */
+}
+
+/* --- Style des cellules (en-têtes et données) --- */
+.panier-table th, .panier-table td {
+    padding: 15px;
+    vertical-align: middle; /* Aligne le contenu au milieu verticalement */
+    text-align: left;
+}
+
+/* --- Style de l'en-tête (Image, Description, Prix) --- */
+.panier-table thead th {
+    background-color: #f8f8f8;
+    color: #555;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+/* --- LA LIGNE DE SÉPARATION --- */
+/* On ajoute une bordure en bas de chaque ligne <tr> dans le corps du tableau */
+.panier-table tbody tr {
+    border-bottom: 1px solid #e0e0e0; 
+}
+
+/* On enlève la bordure de la dernière ligne pour un look plus propre */
+.panier-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+
+/* --- Colonne Image --- */
+.col-image {
+    width: 120px; /* Donne une largeur fixe à la colonne image */
+}
+
+.panier-table img {
+    max-width: 100px; /* L'image ne dépassera pas 100px de large */
+    height: auto;
+    border-radius: 4px; /* Bords légèrement arrondis */
+    display: block; /* Évite les espaces étranges sous l'image */
+}
+
+/* --- Colonne Description --- */
+.panier-table h4 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+    color: #000;
+}
+
+.panier-table p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* --- Colonne Prix --- */
+.col-prix, .prix {
+    width: 120px;
+    text-align: right; /* Aligne le prix à droite */
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* --- Pied de page (Total) --- */
+.panier-table tfoot {
+    border-top: 2px solid #333; /* Trait plus épais pour séparer le total */
+    font-weight: bold;
+}
+
+.total-label {
+    text-align: right;
+    font-size: 18px;
+    color: #333;
+}
+
+.total-prix {
+    font-size: 22px;
+    color: #000;
+    text-align: right;
+}

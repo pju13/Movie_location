@@ -1,48 +1,47 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { FilmCard } from "./FilmCard";
-import { ThemeContext } from "./context/FilmProvider";
 import { useFetchFilms } from "./hooks/useFetchFilms";
 import { Film } from "../types/types";
 import { FilmRow } from "./FilmRow";
+import { useStore } from "./context/FilmProvider";
 
 export const FilmList: React.FC = () => {
-    const { films, isError, isLoading } = useFetchFilms();
+    const { filmsApi, isError, isLoading } = useFetchFilms();
 
-    const context = useContext(ThemeContext);
-    if (!context) {
-        throw new Error("useContext must be used within a ThemeContext.Provider");
-    }
-    const { search, isLocate, setFilms, affichageListe } = context;
+    const filmsEnAffiches = useStore((state) => state.films);
+    const addFilms = useStore((state) => state.addFilms);
+    const searchTitle = useStore((state) => state.searchTitle);
+    const affichageFormatListe = useStore((state) => state.affichageFormatListe);
 
     useEffect(() => {
-        setFilms(films);
-    }, [films, setFilms]);
+        addFilms(filmsApi);
+    }, [filmsApi, addFilms]);
 
     if (isLoading) return <div>Chargement...</div>;
     if (isError) return <div>Erreur lors du chargement des films !!</div>;
 
-    const filmsAAfficher = films?.map((film: Film) => {
-        if (!isLocate(film.id)) {
-            if (search !== '' && film.original_title.toLowerCase().indexOf(search.toLowerCase()) !== -1) {
-                return affichageListe ? <FilmRow key={film.id} film={film} />
+    const filmsAAfficher = filmsEnAffiches?.map((film: Film) => {
+        //if (!isRent(film.id)) {
+            if (searchTitle !== '' && film.original_title.toLowerCase().indexOf(searchTitle.toLowerCase()) !== -1) {
+                return affichageFormatListe ? <FilmRow key={film.id} film={film} />
                 : <FilmCard key={film.id} film={film} />
             } 
-            if (search === '') {
-                return affichageListe ? <FilmRow key={film.id} film={film} />
+            if (searchTitle === '') {
+                return affichageFormatListe ? <FilmRow key={film.id} film={film} />
                 : <FilmCard key={film.id} film={film} />
             }
-        }
+        //}
     }); 
 
-    const classNameItem = !affichageListe ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mt-3" : "";
+    const classNameItem = !affichageFormatListe ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mt-3" : "";
 
     return (
         <>
             <div className="mt-5 mb-3">
-                <h1 className="font-bold italic border-t-4 border-base-100">Toujours à l'affiche</h1>
+                <h1 className="font-bold italic border-t-4 border-indigo-500">Toujours à l'affiche</h1>
             </div>
             <div className={`${classNameItem}`}>
-                {!affichageListe ? 
+                {!affichageFormatListe ? 
                     filmsAAfficher :
                     <ul className="list bg-base-100 rounded-box shadow-md">{filmsAAfficher}</ul>
                 }          

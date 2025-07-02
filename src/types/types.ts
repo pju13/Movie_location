@@ -12,6 +12,7 @@ export type Film = {
     vote_average: number;
     overview: string;
     adult: boolean;
+    rent: boolean;
 }
 
 export type User = {
@@ -20,22 +21,21 @@ export type User = {
     username: string;
 }
 
-export type FilmContextProps = {
-    search: string;
-    setSearch: (query: string) => void;
+export type StoreGestionFilms = {
+    searchTitle: string;
+    affichageFormatListe: boolean;
     films: Film[];
-    setFilms: (films: Film[]) => void;      
     rentFilms: Film[]; 
-    setterRent: (films: Film) => void;    
-    deleteFilm: (id: number) => void;
-    handleSearchFilmById: (id: number) => void;
-    isLocate: (id: number) => boolean;
-    user: User | undefined;
+    user: User | null;
+    updateSearchTitle: (query: string) => void;
+    addFilms: (newFilms: Film[]) => void;      
+    updateFilmsRent: (filmToRent: Film) => void;    
+    deleteByIdFilmToRent: (id: number) => void;
+    deleteAllFilmsToRent: () => void;
+    isRent: (id: number) => boolean;
     setUser: (user: User | undefined) => void;
-    setRentFilms: (films: Film[]) => void;  
-    affichageListe: boolean;
-    setAffichageListe: (type: boolean) => void;
-}
+    updateAffichageListe: (type: boolean) => void;
+};
 
 export type MovieCardProps = {
     film: Film;
@@ -43,4 +43,4 @@ export type MovieCardProps = {
 
 export type BodyProps = {
     children: ReactNode;
-  }
+}

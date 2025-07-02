@@ -1,15 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar } from "../Components/Navbar";
-import { ThemeContext } from "../Components/context/FilmProvider";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import { User } from "../types/types";
 import { Body } from "../Components/Body";
+import { useStore } from "../Components/context/FilmProvider";
 
 
 export const Profile: React.FC = () => {
-    const { user, setUser } = useContext(ThemeContext);
+    const user = useStore((state) => state.user);
+    const setUser = useStore((state) => state.setUser);
+
     const [showToast, setShowtoast] = useState(false);
     const navigate = useNavigate();
 
@@ -20,9 +22,9 @@ export const Profile: React.FC = () => {
     }, [user, navigate]);
 
     const initialValues = {
-        name: user.name ?? '',
-        email: user.email ?? '',
-        username: user.username ?? '',
+        name: user?.name ?? '',
+        email: user?.email ?? '',
+        username: user?.username ?? '',
     }
 
     const onSubmit = (values: User) => {

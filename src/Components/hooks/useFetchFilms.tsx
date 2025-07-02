@@ -9,8 +9,20 @@ export const useFetchFilms = () => {
  
     //console.log(data?.results);
 
+    // 1. On vérifie si les données sont arrivées et si `results` est bien un tableau
+    /*const filmsModifies = Array.isArray(data?.results) 
+        ? data.results.map(film => ({
+            // 2. On copie toutes les propriétés originales du film
+            ...film, 
+            // 3. On ajoute notre nouvelle propriété
+            rent: false 
+          }))
+        : []; // Si pas de données, on retourne un tableau vide
+
+    console.log(filmsModifies);*/
+
     return {
-      films: data?.results,
+      filmsApi: data?.results,
       isLoading,
       isError: error
     }

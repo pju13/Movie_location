@@ -1,17 +1,12 @@
-import { useContext } from "react";
-import { ThemeContext } from "./context/FilmProvider";
-
+import { useStore } from "./context/FilmProvider";
 
 export const Search: React.FC = () => {
-    const context = useContext(ThemeContext);
-    if (!context) {
-        throw new Error("useContext must be used within a ThemeContext.Provider");
-    }
-    
-    const { search, setSearch, setAffichageListe } = context;
+    const updateAffichageListe = useStore((state) => state.updateAffichageListe);
+    const searchTitle = useStore((state) => state.searchTitle);
+    const updateSearchTitle = useStore((state) => state.updateSearchTitle);
 
     const handleAffichage = (e) => {
-        setAffichageListe(e.target.checked);
+        updateAffichageListe(e.target.checked);
     }
 
     return (
@@ -33,9 +28,9 @@ export const Search: React.FC = () => {
 
             <input 
             type="search" 
-            value={search}
+            value={searchTitle}
             placeholder="Rechercher un film..." 
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => updateSearchTitle(e.target.value)}
             className="input input-bordered bg-white w-24 md:w-auto mr-2 max-md:hidden" />
         </>
     );
